@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: var(--font-montserrat), 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-montserrat), 'Montserrat', system-ui, -apple-system, sans-serif;
+  
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --color-accent: #10b981;
+  --color-background-light: #ffffff;
+  --color-background-dark: #111827;
+  --color-surface: #f9fafb;
+  --color-border-subtle: #e5e7eb;
+  
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* Custom color utilities for primary */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.hover\:bg-primary-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.hover\:text-primary:hover {
+  color: var(--color-primary);
+}
+
+.focus\:ring-primary:focus {
+  --tw-ring-color: var(--color-primary);
+}
+
+.focus\:border-primary:focus {
+  border-color: var(--color-primary);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+@keyframes float-subtle {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(1%, -1%); }
+}
+
+.animate-float-subtle {
+  animation: float-subtle 8s ease-in-out infinite;
+}
+
+@keyframes float-chevron {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.animate-float-chevron {
+  animation: float-chevron 3s ease-in-out infinite;
+}
+
+@keyframes float-levitate {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+  50% { transform: translateY(-10px) rotate(1deg); opacity: 1; }
+}
+
+.animate-float-levitate {
+  animation: float-levitate 5s ease-in-out infinite;
+}
+
+.animate-float-levitate-slow {
+  animation: float-levitate 7s ease-in-out infinite;
+}
+
+.animate-float-levitate-fast {
+  animation: float-levitate 4s ease-in-out infinite;
+}
+
+/* Custom scrollbar for review content */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Force word break for long text */
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.word-break-break-all {
+  word-break: break-all;
+}
+
+/* Custom utility classes */
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Apply Montserrat font globally */
+body {
+  font-family: var(--font-montserrat), 'Montserrat', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Custom select scrollbar */
+.custom-select-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-select-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.custom-select-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.custom-select-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
