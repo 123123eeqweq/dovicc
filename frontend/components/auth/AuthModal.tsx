@@ -86,9 +86,35 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
       setGoogleLoading(true);
       setError("");
 
+      type GooglePayload = {
+        email?: string;
+        name?: string;
+        picture?: string;
+        sub?: string;
+        aud?: string;
+        iss?: string;
+        exp?: number;
+      };
+
+      let decoded: GooglePayload = {};
+      try {
+        decoded = jwtDecode<GooglePayload>(response.credential);
+      } catch {
+        // use credential only if decode fails
+      }
+
+      const sendWithFallback = (extra?: { email?: string; name?: string; picture?: string; sub?: string }) =>
+        loginWithGoogle({
+          credential: response.credential,
+          email: extra?.email ?? decoded.email ?? "",
+          name: extra?.name ?? decoded.name,
+          picture: extra?.picture ?? decoded.picture,
+          sub: extra?.sub ?? decoded.sub,
+        });
+
       try {
         try {
-          await loginWithGoogle(response.credential);
+          await sendWithFallback();
           toast.success("Вітаємо! Ви успішно увійшли через Google");
           await onSuccess();
           onClose();
@@ -104,48 +130,33 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
             details?: string;
           };
 
-          if (
-            errorResponse.status === 401 &&
-            (errorResponse.error?.includes("Token verification failed") ||
-              errorResponse.details?.includes("network restrictions"))
-          ) {
-            console.log(
-              "Backend verification failed, using frontend verification"
-            );
+          const useFrontendFallback =
+            (errorResponse.status === 401 &&
+              (errorResponse.error?.includes("Token verification failed") ||
+                errorResponse.details?.includes("network restrictions"))) ||
+            (errorResponse.status === 400 && decoded.email);
 
-            const decoded = jwtDecode<{
-              email: string;
-              name?: string;
-              picture?: string;
-              sub: string;
-              aud: string;
-              iss: string;
-              exp: number;
-            }>(response.credential);
-
-            if (decoded.exp * 1000 < Date.now()) {
+          if (useFrontendFallback && decoded.email) {
+            if (decoded.exp && decoded.exp * 1000 < Date.now()) {
               throw new Error("Token expired");
             }
-
             if (
+              decoded.iss &&
               decoded.iss !== "https://accounts.google.com" &&
               decoded.iss !== "accounts.google.com"
             ) {
               throw new Error("Invalid token issuer");
             }
-
             const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-            if (decoded.aud !== googleClientId) {
+            if (googleClientId && decoded.aud && decoded.aud !== googleClientId) {
               throw new Error("Invalid token audience");
             }
-
-            await loginWithGoogle({
+            await sendWithFallback({
               email: decoded.email,
               name: decoded.name,
               picture: decoded.picture,
               sub: decoded.sub,
             });
-
             toast.success("Вітаємо! Ви успішно увійшли через Google");
             await onSuccess();
             onClose();

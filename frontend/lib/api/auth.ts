@@ -51,24 +51,25 @@ export async function logout() {
 export const loginWithGoogle = async (
   data:
     | string
-    | { email: string; name?: string; picture?: string; sub?: string }
+    | { credential?: string; email: string; name?: string; picture?: string; sub?: string }
 ) => {
+  const body: Record<string, string | undefined> =
+    typeof data === "string"
+      ? { credential: data }
+      : {
+          ...(data.credential && { credential: data.credential }),
+          ...(data.email && { email: data.email }),
+          ...(data.name && { name: data.name }),
+          ...(data.picture && { picture: data.picture }),
+          ...(data.sub && { sub: data.sub }),
+        };
   const response = await fetch("/api/auth/google", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify(
-      typeof data === "string"
-        ? { credential: data }
-        : {
-            email: data.email,
-            name: data.name,
-            picture: data.picture,
-            sub: data.sub,
-          }
-    ),
+    body: JSON.stringify(body),
   });
 
   if (!response.ok) {
