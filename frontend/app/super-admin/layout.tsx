@@ -37,21 +37,17 @@ export default async function SuperAdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  try {
-    const data = await getCurrentUserServer();
-    
-    if (!data || !data.user) {
-      notFound();
-    }
+  const data = await getCurrentUserServer();
 
-    const user = data.user;
-
-    if (user.role !== 'superadmin') {
-      notFound();
-    }
-
-    return <>{children}</>;
-  } catch (error: any) {
+  if (!data || !data.user) {
     notFound();
   }
+
+  const user = data.user;
+
+  if (user.role !== 'superadmin') {
+    notFound();
+  }
+
+  return <>{children}</>;
 }

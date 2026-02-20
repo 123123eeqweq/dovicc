@@ -85,13 +85,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   sitemapEntries.push({
-    url: `${BASE_URL}/inshe`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.3,
-  });
-
-  sitemapEntries.push({
     url: `${BASE_URL}/privacy`,
     lastModified: new Date(),
     changeFrequency: 'yearly',

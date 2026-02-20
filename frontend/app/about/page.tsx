@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <div className="min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-8 md:py-20">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-8 md:py-20">
         <div className="max-w-6xl mx-auto space-y-12 md:space-y-20">
         
         <div className="text-center space-y-4 md:space-y-6">

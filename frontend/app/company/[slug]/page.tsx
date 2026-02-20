@@ -11,6 +11,7 @@ import { CompanySchema } from '@/components/seo/CompanySchema';
 import { CompanySEOText } from '@/components/seo/CompanySEOText';
 import { CompanyLogo } from '@/components/company/CompanyLogo';
 import { truncateDescription, getHreflangAlternates } from '@/lib/seo';
+import { getRatingLabel } from '@/lib/utils';
 import { BASE_URL } from '@/lib/constants';
 import type { Metadata } from 'next';
 
@@ -168,7 +169,7 @@ export default async function CompanyProfile({
         }}
         reviews={approvedReviewsForSchema}
       />
-      <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-16 pb-10 md:py-10">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-10 md:py-10">
       <Breadcrumb
         items={[
           { label: 'Головна', href: '/' },
@@ -265,7 +266,7 @@ export default async function CompanyProfile({
                            </svg>
                         </div>
                         <div className="text-center mt-3">
-                          <div className="text-xs md:text-sm font-medium text-slate-900">Дуже добре</div>
+                          <div className="text-xs md:text-sm font-medium text-slate-900">{getRatingLabel(company.rating)}</div>
                           <div className="text-[10px] md:text-xs text-slate-500">на основі {company.reviewCount} оцінок</div>
                         </div>
                       </div>

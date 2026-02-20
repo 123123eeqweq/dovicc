@@ -35,7 +35,7 @@ export default async function SearchPage({
 
   if (!q || q.trim().length === 0) {
     return (
-      <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-10 md:py-10">
         <Breadcrumb
           items={[
             { label: 'Головна', href: '/' },
@@ -63,7 +63,7 @@ export default async function SearchPage({
   const hasResults = results.companies.length > 0 || results.categories.length > 0;
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-10">
+    <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-10 md:py-10">
       <Breadcrumb
         items={[
           { label: 'Головна', href: '/' },

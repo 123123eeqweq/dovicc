@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function Privacy() {
   return (
-    <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-10 md:py-16">
+    <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-10 md:py-16">
       <div className="max-w-4xl mx-auto space-y-12">
         
         <div className="text-center space-y-4">

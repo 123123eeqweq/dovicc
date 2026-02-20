@@ -37,20 +37,16 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  try {
-    const data = await getCurrentUserServer();
-    
-    if (!data || !data.user) {
-      notFound();
-    }
+  const data = await getCurrentUserServer();
 
-    const user = data.user;
-    if (!user.isAdmin && user.role !== 'admin' && user.role !== 'superadmin') {
-      notFound();
-    }
-
-    return <>{children}</>;
-  } catch (error: any) {
+  if (!data || !data.user) {
     notFound();
   }
+
+  const user = data.user;
+  if (!user.isAdmin && user.role !== 'admin' && user.role !== 'superadmin') {
+    notFound();
+  }
+
+  return <>{children}</>;
 }

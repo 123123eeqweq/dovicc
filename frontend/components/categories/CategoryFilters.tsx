@@ -38,6 +38,7 @@ export function CategoryFilters({ companies }: CategoryFiltersProps) {
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
 
+  /* eslint-disable react-hooks/set-state-in-effect -- syncing URL searchParams to local state */
   useEffect(() => {
     const ratingParam = searchParams.get('rating');
     if (ratingParam) {
@@ -64,6 +65,7 @@ export function CategoryFilters({ companies }: CategoryFiltersProps) {
       setSortOption(sortParam);
     }
   }, [searchParams]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -194,6 +196,7 @@ export function CategoryFilters({ companies }: CategoryFiltersProps) {
     }, 100);
   };
 
+  /* eslint-disable-next-line react-hooks/static-components -- FiltersContent uses closure state, extracting would require large refactor */
   const FiltersContent = () => (
     <div>
       <h3 className="font-semibold text-slate-900 mb-5 flex items-center gap-2">

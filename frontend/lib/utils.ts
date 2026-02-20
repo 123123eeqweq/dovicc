@@ -1,3 +1,16 @@
+/** Get Ukrainian label for rating value (1–5 scale) */
+export function getRatingLabel(rating: number): string {
+  if (rating <= 0) return 'Немає оцінок';
+  if (rating >= 4.5) return 'Відмінно';
+  if (rating >= 4) return 'Дуже добре';
+  if (rating >= 3.5) return 'Добре';
+  if (rating >= 3) return 'Задовільно';
+  if (rating >= 2.5) return 'Посередньо';
+  if (rating >= 2) return 'Погано';
+  if (rating >= 1.5) return 'Дуже погано';
+  return 'Жахливо';
+}
+
 /** Get initials from a name (e.g. "John Doe" -> "JD") */
 export function getInitials(name: string): string {
   return name

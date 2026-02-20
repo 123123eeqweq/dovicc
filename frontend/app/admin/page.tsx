@@ -23,18 +23,18 @@ export default function AdminDashboard() {
   const router = useRouter();
   const { logout: logoutFromContext } = useAuth();
 
-  useEffect(() => {
-    loadUser();
-  }, []);
-
   const loadUser = async () => {
     try {
       const data = await getCurrentUser();
       setUser(data.user);
-    } catch (err: any) {
+    } catch {
       toast.error('Не вдалося завантажити дані');
     }
   };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   const handleLogout = async () => {
     setShowLogoutConfirm(false);

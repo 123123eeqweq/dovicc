@@ -30,7 +30,7 @@ export default async function Categories() {
 
   return (
     <>
-      <section className="py-8 md:py-16 lg:py-20">
+      <section className="pt-20 pb-8 md:py-16 lg:py-20">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           <Breadcrumb
             items={[

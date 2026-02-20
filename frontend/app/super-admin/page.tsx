@@ -123,27 +123,19 @@ export default function SuperAdminPage() {
   const router = useRouter();
   const { logout: logoutFromContext } = useAuth();
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  useEffect(() => {
-    loadAnalytics();
-  }, [dateRange, customStart, customEnd]);
-
   const loadData = async () => {
     try {
       const userData = await getCurrentUser();
       setCurrentUser({ email: userData.user.email, name: userData.user.name });
-      
+
       const [superAdminsData, adminsData] = await Promise.all([
         getSuperAdmins(),
         getAdmins(),
       ]);
-      
+
       setSuperAdmins(superAdminsData);
       setAdmins(adminsData);
-    } catch (err: any) {
+    } catch {
       toast.error('Не вдалося завантажити дані');
     }
   };
@@ -153,8 +145,8 @@ export default function SuperAdminPage() {
     try {
       await logoutFromContext();
       router.push('/');
-    } catch (err) {
-
+    } catch {
+      // ignore
     }
   };
 
@@ -206,10 +198,18 @@ export default function SuperAdminPage() {
 
       const data = await getSuperAdminAnalytics(startDate, endDate);
       setAnalytics(data);
-    } catch (err: any) {
+    } catch {
       toast.error('Не вдалося завантажити аналітику');
     }
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    loadAnalytics();
+  }, [dateRange, customStart, customEnd]);
 
   const handlePromote = async () => {
     if (!promoteEmail.trim()) {
@@ -223,8 +223,8 @@ export default function SuperAdminPage() {
       setPromoteEmail('');
       setShowPromoteForm(false);
       loadData();
-    } catch (err: any) {
-      toast.error(err.message || 'Не вдалося призначити адміном');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Не вдалося призначити адміном');
     }
   };
 

@@ -274,7 +274,7 @@ export default function UserProfile() {
 
   if (loading) {
     return (
-      <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-10 md:py-10">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-slate-500 font-medium">Завантаження...</div>
         </div>
@@ -290,7 +290,7 @@ export default function UserProfile() {
   const avgRating = getAverageRating();
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-6 md:py-10">
+    <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-6 md:py-10">
       <Breadcrumb
         items={[
           { label: 'Головна', href: '/' },
@@ -301,8 +301,8 @@ export default function UserProfile() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
         <aside className="lg:col-span-1 space-y-4 lg:space-y-6">
-          <div className="bg-white rounded-2xl border border-slate-200/80 p-4 md:p-5 lg:p-6 flex flex-row lg:flex-col items-center lg:items-center text-center lg:text-center shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)]">
-            <div className="flex flex-row lg:flex-col items-center gap-4 w-full lg:w-auto">
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-4 md:p-5 lg:p-6 flex flex-row lg:flex-col items-center lg:items-center text-center lg:text-center shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] overflow-hidden">
+            <div className="flex flex-row lg:flex-col items-center gap-4 w-full min-w-0">
               <div className="relative shrink-0">
                 {user.avatarUrl ? (
                   <div className="relative size-16 md:size-20 lg:size-24 rounded-full overflow-hidden border-2 border-slate-200/80">
@@ -337,13 +337,13 @@ export default function UserProfile() {
                   />
                 </label>
               </div>
-              <div className="flex-1 min-w-0 text-left lg:text-center">
+              <div className="flex-1 min-w-0 w-full max-w-full text-left lg:text-center overflow-hidden">
                 <h2
-                  className="text-lg md:text-xl font-bold text-slate-900 truncate"
+                  className="text-lg md:text-xl font-bold text-slate-900 truncate block"
                   title={user.name}>
                   {user.name}
                 </h2>
-                <p className="text-xs md:text-sm text-slate-500 truncate mt-0.5" title={user.email}>
+                <p className="text-xs md:text-sm text-slate-500 truncate mt-0.5 block" title={user.email}>
                   {user.email}
                 </p>
                 <div className="flex gap-4 mt-2 lg:hidden justify-start">

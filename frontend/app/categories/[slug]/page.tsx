@@ -138,7 +138,7 @@ export default async function CategoryListing({ params }: { params: Promise<{ sl
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-6 md:py-10 -mt-2 relative z-10">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-4 sm:pt-6 pb-6 md:py-10 -mt-2 relative z-10">
 
       {category.companies.length === 0 ? (
         <div className="bg-white rounded-xl md:rounded-2xl border border-slate-200/80 p-8 md:p-16 text-center shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)]">

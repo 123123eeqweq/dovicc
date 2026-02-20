@@ -94,7 +94,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
   ];
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-10">
+    <div className="max-w-[1200px] mx-auto px-4 md:px-8 pt-20 pb-10 md:py-10">
       <ReviewSchema review={review} />
       <BreadcrumbSchema items={breadcrumbItems} />
       <Breadcrumb
